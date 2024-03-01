@@ -1,10 +1,14 @@
 import React from "react";
 import styles from "./keyboard.module.css";
+import { useAppDispatch } from "../../hooks/hooks";
+import { addEnteredLetters } from "../../store/appSlice";
 
 const Keyboard: React.FC = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+
   const handleKeyPress = (e: React.MouseEvent<HTMLDivElement>) => {
     const clickedKey = e.currentTarget.innerText;
-    console.log(clickedKey);
+    dispatch(addEnteredLetters(clickedKey));
   };
   return (
     <div className={styles.keyboard}>
