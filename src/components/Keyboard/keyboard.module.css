@@ -26,3 +26,7 @@
   cursor: pointer;
   border-radius: 20%;
 }
+
+.keyboard__key:active {
+  transform: scale(0.94);
+}

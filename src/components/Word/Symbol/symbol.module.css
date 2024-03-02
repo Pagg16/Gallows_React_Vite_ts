@@ -1,6 +1,8 @@
 .symbol {
   font-size: 55px;
   font-weight: bold;
+  position: relative;
+  height: 70px;
 }
 
 .symbol_underlining_write {
@@ -8,5 +10,17 @@
 }
 
 .symbol_underlining_right {
-    border-bottom: 5px solid blue;
+  border-bottom: 5px solid blue;
+}
+
+.symbol_pointer::after {
+  content: "";
+  position: absolute;
+  top: 110%;
+  right: 50%;
+  transform: translateX(50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(138, 138, 138);
 }

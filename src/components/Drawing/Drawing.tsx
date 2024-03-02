@@ -1,7 +1,12 @@
 import React from "react";
 import styles from "./drawing.module.css";
+import { useAppSelector } from "../../hooks/hooks";
 
 const Drawing: React.FC = (): JSX.Element => {
+  const word = useAppSelector((state) => state.app.guessWord);
+  const enteredLetters = useAppSelector((state) => state.app.enteredLetters);
+
+ 
   return (
     <div className={styles.drawing}>
       <div className={styles.drawingVerticalPanel}>

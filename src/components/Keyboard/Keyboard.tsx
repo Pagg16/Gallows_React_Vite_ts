@@ -1,15 +1,75 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./keyboard.module.css";
-import { useAppDispatch } from "../../hooks/hooks";
-import { addEnteredLetters } from "../../store/appSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import {
+  addEnteredLetters,
+  addGuessWord,
+  addGuessedWords,
+  resetEnteredLetters,
+  addGuessedСharacters,
+} from "../../store/appSlice";
+import { getRandomWord } from "../../utils/getRandomWord.js";
 
 const Keyboard: React.FC = (): JSX.Element => {
+  const allSymbols = useRef<string>("");
   const dispatch = useAppDispatch();
+  const word = useAppSelector((state) => state.app.guessWord);
+  console.log(word);
 
   const handleKeyPress = (e: React.MouseEvent<HTMLDivElement>) => {
     const clickedKey = e.currentTarget.innerText;
+    allSymbols.current += clickedKey;
+
     dispatch(addEnteredLetters(clickedKey));
+
+    comparisonSymbols();
+
+    if (allSymbols.current.length === word.length) {
+      comparisonWords();
+      restartGame();
+    }
   };
+
+  function comparisonSymbols() {
+    const currentSymbolsLenght = allSymbols.current.length - 1;
+    if (
+      allSymbols.current[currentSymbolsLenght] !== word[currentSymbolsLenght]
+    ) {
+      return;
+    }
+
+    dispatch(addGuessedСharacters());
+  }
+
+  function comparisonWords() {
+    if (allSymbols.current.toLowerCase() !== word.toLowerCase()) {
+      return;
+    }
+
+    dispatch(addGuessedWords());
+  }
+
+  function restartGame() {
+    setTimeout(() => {
+      setRandomWord();
+      dispatch(resetEnteredLetters());
+      allSymbols.current = "";
+    }, 300);
+  }
+
+  function setRandomWord() {
+    dispatch(addGuessWord(getRandomWord()));
+  }
+
+  useEffect(() => {
+    dispatch(resetEnteredLetters());
+    allSymbols.current = "";
+  }, [word]);
+
+  useEffect(() => {
+    dispatch(addGuessWord(getRandomWord()));
+  }, []);
+
   return (
     <div className={styles.keyboard}>
       <div className={styles.keyboard__string}>

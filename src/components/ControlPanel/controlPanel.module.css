@@ -1,4 +1,37 @@
 .controlPanel {
-  font-size: 2em;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  padding-bottom: 50px;
+}
+
+.controlPanel__restartButton {
+  font-size: 15px;
+  background-color: rgb(214, 214, 214);
+  margin: 0 30px 0 0;
+}
+
+.controlPanel__restartButton:active {
+  transform: scale(0.94);
+}
+
+.controlPanel__restartButton:focus {
+  outline: none;
+}
+
+.controlPanel__numberWordSymbol {
+  font-size: 20px;
+}
+
+.controlPanel__number {
+  font-weight: bold;
+  color: green;
+}
+
+.controlPanel__numberBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
