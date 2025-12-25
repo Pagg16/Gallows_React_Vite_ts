@@ -28,13 +28,13 @@ const ControlPanel: React.FC = (): JSX.Element => {
       </div>
       <div className={styles.controlPanel__numberBlock}>
         <div className={styles.controlPanel__numberWordSymbol}>
-          Number of symbols guessed{" "}
+          Количество угаданных символов{" "}
           <span className={styles.controlPanel__number}>
             {guessedСharacters}
           </span>
         </div>
         <div className={styles.controlPanel__numberWordSymbol}>
-          Number of words guessed{" "}
+          Количество угаданных слов{" "}
           <span className={styles.controlPanel__number}>{guessedWords}</span>
         </div>
       </div>
